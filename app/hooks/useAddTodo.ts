@@ -6,7 +6,7 @@ export const useAddTodo = (onSuccessCallback?: () => void) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (newTodo: Omit<Todo, "id">) => addTodo(newTodo),
+    mutationFn: (newTodo: Todo) => addTodo(newTodo),
     onSuccess: (newTodo: Todo) => {
       queryClient.setQueryData<Todo[]>(["todos"], (oldTodos = []) => [
         ...oldTodos,

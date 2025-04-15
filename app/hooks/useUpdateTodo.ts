@@ -7,19 +7,18 @@ export const useUpdateTodo = () => {
 
   return useMutation({
     mutationFn: updateTodo,
-    onMutate: async (todoId: number) => {
+    onMutate: async (updatedTodo) => {
       await queryClient.cancelQueries({ queryKey: ["todos"] });
-
       const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]);
-
+      
       queryClient.setQueryData<Todo[]>(["todos"], (old = []) =>
         old.map((todo) =>
-          todo.id === todoId
-            ? { ...todo, completed: !todo.completed }
+          todo.id === updatedTodo.id 
+            ? { ...todo, completed: !todo.completed } 
             : todo
         )
       );
-
+      
       return { previousTodos };
     },
     onError: (err, _, context) => {

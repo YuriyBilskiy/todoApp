@@ -11,16 +11,19 @@ export const fetchTodos = async () => {
     return response.data;
 }
 export const deleteTodo = async (id: number) => {
-    const response = await apiClient.delete(`/todos/${id}`);
-    return response.data;
+    await apiClient.delete(`/todos/${id}`);
+    return id;
 }
 
 export const addTodo = async (newTodo: Omit<Todo, "id">) => {
-    const response = await apiClient.post('/todos', newTodo);
+    const response = await apiClient.post("/todos", newTodo);
+    response.data.id = Math.random();
     return response.data;
-};
+  };
 
-export const updateTodo = async (id: number) => {
-    const response = await apiClient.put(`/todos/${id}`);
+export const updateTodo = async (todo: Todo) => {
+    const response = await apiClient.patch(`/todos/${todo.id}`, {
+        completed: !todo.completed
+    });
     return response.data;
 }

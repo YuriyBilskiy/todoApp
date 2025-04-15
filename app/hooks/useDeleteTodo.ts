@@ -16,7 +16,7 @@ export const useDeleteTodo = () => {
       return { previousTodos };
     },
     onError: (err, _, context) => {
-      queryClient.setQueryData(["todos"], context?.previousTodos);
+      console.error("Failed to delete todo on server:", err);
     },
   });
 };
