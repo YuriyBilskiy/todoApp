@@ -1,6 +1,3 @@
-# Create the updated README.md content in English and write it to a file.
-
-readme_content = """
 # 📝 Next.js Todo App
 
 This is a simple Todo application built with **Next.js 14** (App Router) using **React Query**, **Tailwind CSS**, and **Framer Motion**.
